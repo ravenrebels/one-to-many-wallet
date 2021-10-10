@@ -131,10 +131,12 @@ function App({ user, logOut }) {
           };
         });
 
-        //Filter assets
-        assetsArray = assetsArray.filter(function (asset) {
-          return settings.assetNames.includes(asset.name);
-        });
+        //Filter assets, if specified in settings.json
+        if (settings.assetNames && settings.assetNames.length > 0) {
+          assetsArray = assetsArray.filter(function (asset) {
+            return settings.assetNames.includes(asset.name);
+          });
+        }
         setAssets(assetsArray);
       });
 

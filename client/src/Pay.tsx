@@ -160,7 +160,7 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
                 marginTop: "10px",
               }}
               className="padding-modest"
-              src={`http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=${receiveAddress}&qzone=1&margin=0&size=150x150&ecc=L`}
+              src={`http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=raven:${receiveAddress}&qzone=1&margin=0&size=150x150&ecc=L`}
             />
           </div>
         </div>

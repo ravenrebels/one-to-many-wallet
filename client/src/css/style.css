@@ -4,17 +4,20 @@ body {
   padding: 0;
   height: auto;
 }
+body {
+  position: relative;
+}
 a {
   color: white;
 }
 body {
-  background: #191970;
+  background: black;
   color: white;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: 50%;
   background-size: cover;
-  background-image: linear-gradient(147deg, hotpink, #000 74%);
+  /* background-image: linear-gradient(147deg, #957dad, #000 74%); */
   font-family: "Quicksand", sans-serif;
   font-size: 16px;
 }
@@ -23,11 +26,11 @@ button {
 }
 .glass {
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border: 1px solid rgba(0, 0, 0, 0.18);
 }
 /* mobile first */
 #app {
@@ -35,29 +38,15 @@ button {
   margin: auto;
 }
 
-.bird {
-  background-image: url("https://cdn.pixabay.com/photo/2016/11/21/17/59/blackboard-1846865_1280.jpg");
-  background-image: url("https://cdn.pixabay.com/photo/2015/03/20/06/46/fist-681848_1280.jpg");
- 
-  background-repeat: no-repeat;
+#app {
+  background: rgb(27, 36, 83);
+  background: radial-gradient(
+    circle,
+    rgba(27, 36, 83, 1) 0%,
+    rgba(26, 10, 40, 0.907533960849965) 100%
+  );
 }
 
-@media only screen and (min-width: 600px) {
-  body {
-    width: 100%;
-    min-height: calc(100vh);
-  }
-  #app {
-    max-width: calc(100vw);
-    width: 600px;
-    margin: auto;
-  }
-  .bird {
-    
-    background-position: top;
-    /* background-size: 1640px 1680px;*/
-  }
-}
 
 .padding-default {
   padding: 22px;
@@ -84,7 +73,7 @@ button {
   margin-bottom: 44px;
   font-size: 1.5rem;
 }
-.raven-rebels-multi-wallet__home-asset{
+.raven-rebels-multi-wallet__home-asset {
   margin-bottom: 22px;
 }
 
@@ -114,3 +103,24 @@ button {
   max-width: 300;
   border-radius: 10px;
 }
+
+
+
+@media only screen and (min-width: 600px) {
+  body {
+    width: 100%;
+    min-height: calc(100vh);
+  }
+  #app {
+    max-width: calc(100vw);
+    width: 900px;
+    margin: auto;
+  }
+  .raven-rebels-multi-wallet__asset-image img {
+    max-height: 300;
+    max-width: 500;
+    border-radius: 10px;
+  }
+}
+
+
