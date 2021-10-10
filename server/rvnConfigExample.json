@@ -1,0 +1,6 @@
+{
+  "rpcUsername": "Your rpcuser specified in raven.conf for your node",
+  "rpcPassword": "Your rpcpassword specified in raven.conf for your node",
+  "rpcURL": "The URL for your node, for example http://127.0.0.1:8766",
+  "assetNames": ["HOPIUM"]
+}

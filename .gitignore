@@ -1,0 +1,7 @@
+.parcel-cache
+dist
+firebaseConfig.json
+node_modules
+rvnConfig.json
+serviceAccount.json
+tick.bat

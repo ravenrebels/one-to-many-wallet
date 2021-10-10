@@ -1,0 +1,116 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+a {
+  color: white;
+}
+body {
+  background: #191970;
+  color: white;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50%;
+  background-size: cover;
+  background-image: linear-gradient(147deg, hotpink, #000 74%);
+  font-family: "Quicksand", sans-serif;
+  font-size: 16px;
+}
+button {
+  font-size: 20px;
+}
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+/* mobile first */
+#app {
+  width: 100%;
+  margin: auto;
+}
+
+.bird {
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/21/17/59/blackboard-1846865_1280.jpg");
+  background-image: url("https://cdn.pixabay.com/photo/2015/03/20/06/46/fist-681848_1280.jpg");
+ 
+  background-repeat: no-repeat;
+}
+
+@media only screen and (min-width: 600px) {
+  body {
+    width: 100%;
+    min-height: calc(100vh);
+  }
+  #app {
+    max-width: calc(100vw);
+    width: 600px;
+    margin: auto;
+  }
+  .bird {
+    
+    background-position: top;
+    /* background-size: 1640px 1680px;*/
+  }
+}
+
+.padding-default {
+  padding: 22px;
+}
+.padding-modest {
+  padding: 5px;
+}
+.raven-rebels-multi-wallet__nav {
+  list-style: none;
+  margin-bottom: 0;
+  padding-top: 22px;
+}
+.raven-rebels-multi-wallet__nav-item {
+  display: inline-block;
+  margin-right: 22px;
+}
+.raven-rebels-multi-wallet__nav-item:last-child {
+  margin-right: 0;
+}
+.raven-rebels-multi-wallet__nav-item:last-child {
+  float: right;
+}
+.raven-rebels-multi-wallet__home-heading {
+  margin-bottom: 44px;
+  font-size: 1.5rem;
+}
+.raven-rebels-multi-wallet__home-asset{
+  margin-bottom: 22px;
+}
+
+.blink_me {
+  animation: blinker 2s linear infinite;
+}
+
+.unstyled-button {
+  border: none;
+  background: none;
+  color: white;
+  cursor: hand;
+  font-family: "Quicksand", sans-serif;
+  padding: 0;
+}
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.raven-rebels-multi-wallet__asset-image {
+  text-align: center;
+}
+.raven-rebels-multi-wallet__asset-image img {
+  max-height: 300;
+  max-width: 300;
+  border-radius: 10px;
+}

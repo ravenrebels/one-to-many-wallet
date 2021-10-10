@@ -1,0 +1,9 @@
+{
+  "name": "Wallet",
+  "short_name": "Wallet",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Wallet",
+  "icons": []
+}
