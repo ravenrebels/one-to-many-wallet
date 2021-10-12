@@ -64,12 +64,10 @@ function useUser(): User {
 }
 function App({ user, logOut }) {
   const [route, setRoute] = React.useState(Routes.OVERVIEW);
-
   const [assets, setAssets] = React.useState([]);
-
   const [receiveAddress, setReceiveAddress] = React.useState("");
-
   const [transactions, setTransactions] = React.useState(null);
+  const [requests, setRequests] = React.useState([]);
 
   React.useEffect(() => {
     firebase
@@ -78,31 +76,35 @@ function App({ user, logOut }) {
       .update(user.toJSON());
   }, []);
 
+  //Listen to user
   React.useEffect(() => {
-    //Listen to assets
-
-    //Listen to balance
-    const refString = "users/" + user.uid + "/ravencoinAddresses";
+    const refString = "users/" + user.uid;
     const ref = firebase.database().ref(refString);
 
     ref.on("value", (snapshot) => {
-      const values = Object.values(snapshot.val());
-      if (values.length > -1) {
-        const address = values[0]["address"];
-        setReceiveAddress(address);
-      }
-    });
-  }, []);
+      const userObj = snapshot.val();
+ 
+      //Set requests
+      console.log("Requests", Object.values(userObj.requests));
+      setRequests(Object.values(userObj.requests));
 
-  //Listen to transactions
-  React.useEffect(() => {
-    const ref = firebase.database().ref("users/" + user.uid + "/transactions");
-    ref.on("value", (snapshot) => {
-      const values = snapshot.val();
-      setTransactions(values);
-      console.log("transactions", values);
+      //Set set receive address
+      if(userObj.ravencoinAddresses){
+        setReceiveAddress(Object.values(userObj.ravencoinAddresses)[0]["address"]);
+      }
+
+      //Set transactions
+      setTransactions(userObj.transactions);
+      
     });
+   
+    const unregisterEventListener = function () {
+      ref.off("value");
+    };
+    return unregisterEventListener;
   }, []);
+  
+ 
 
   React.useEffect(() => {
     //Listen to balance
@@ -196,7 +198,10 @@ function App({ user, logOut }) {
         </li>
       </ul>
       {route === Routes.TRANSACTIONS && (
-        <Transactions transactions={transactions}></Transactions>
+        <Transactions
+          transactions={transactions}
+          requests={requests}
+        ></Transactions>
       )}
       {route === Routes.OVERVIEW && <Home user={user} assets={assets} />}
       {route === Routes.PAY && (

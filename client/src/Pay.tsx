@@ -3,7 +3,7 @@ import React from "react";
 export function Pay({ user, database, assets, receiveAddress, okCallback }) {
   const [to, setTo] = React.useState("");
   const [amount, setAmount] = React.useState("");
-  const [asset, setAsset] = React.useState("");
+  const [asset, setAsset] = React.useState(assets && assets[0].name);
 
   const submit = async (_) => {
     if (isNaN(parseFloat(amount)) === true) {
@@ -144,8 +144,7 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
     <div className="raven-rebels-multi-wallet__pay padding-default">
       <div className="padding-default glass">
         <h1>Pay / Transfer</h1>
-        <h3>Payments are not yet possible</h3>
-        <h4>You can only receive</h4>
+        {PAY}
         <div style={{ marginTop: "22px" }}>
           <div
             className="padding-default glass"

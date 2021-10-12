@@ -1,5 +1,5 @@
 import React from "react";
-
+import Requests from "./Requests";
 interface ITransaction {
   confirmations: number;
 }
@@ -21,9 +21,13 @@ export function hasPendingTransactions(transactions: ITransaction) {
   }
   return false;
 }
-export function Transactions({ transactions }) {
+export function Transactions({ requests, transactions }) {
   if (!transactions) {
-    return <h1 className="glass padding-default">You do not have any transactions yet</h1>;
+    return (
+      <h1 className="glass padding-default">
+        You do not have any transactions yet
+      </h1>
+    );
   }
 
   const keys = Object.keys(transactions);
@@ -45,6 +49,7 @@ export function Transactions({ transactions }) {
   return (
     <div className="padding-default" data-has-pending-transactions={pending}>
       <div className="padding-default glass">
+        <Requests requests={requests} />
         <h1>Received transactions</h1>
         <div style={{ marginTop: "40px" }}>
           {keys.map(function (key) {
@@ -92,7 +97,10 @@ export function Transactions({ transactions }) {
                   To: {details.destination}
                 </div>
                 <div>
-                   Confirmations: {trans.confirmations > 20 ? "more than 20": trans.confirmations}
+                  Confirmations:{" "}
+                  {trans.confirmations > 20
+                    ? "more than 20"
+                    : trans.confirmations}
                 </div>
                 <a
                   href={href}

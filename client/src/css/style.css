@@ -49,7 +49,7 @@ button {
 
 
 .padding-default {
-  padding: 22px;
+  padding: 11px;
 }
 .padding-modest {
   padding: 5px;
@@ -120,6 +120,9 @@ button {
     max-height: 300;
     max-width: 500;
     border-radius: 10px;
+  }
+  .padding-default {
+    padding: 22px;
   }
 }
 
