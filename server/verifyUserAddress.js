@@ -1,6 +1,7 @@
 const admin = require("firebase-admin");
 const rvnConfig = require("./rvnConfig.json");
 const getRPC = require("./getRPC");
+const firebaseConfig = require("../firebaseConfig.json");
 
 const serviceAccount = require("./serviceAccount.json");
 
