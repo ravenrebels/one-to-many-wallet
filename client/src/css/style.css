@@ -1,22 +1,21 @@
 html,
 body {
-
   margin: 0;
   padding: 0;
   height: auto;
 }
- 
+
 a {
   color: white;
 }
 body {
- 
+  background: rgb(168,179,238);
+  background: radial-gradient(circle, rgba(168,179,238,1) 1%, rgba(132,15,235,0.907533960849965) 100%);
   color: white;
   position: relative;
-  background-image: url("https://cdn.pixabay.com/photo/2020/08/23/11/58/restaurant-5510672_1280.jpg");
-   
-  background-size: cover;
-  /* background-image: linear-gradient(147deg, #957dad, #000 74%); */
+  display: flex;
+  justify-content: center;
+
   font-family: "Quicksand", sans-serif;
   font-size: 16px;
 }
@@ -25,7 +24,7 @@ button {
 }
 .glass {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -39,15 +38,13 @@ button {
 }
 
 #app {
-  background: rgb(27, 36, 83);
-  background: radial-gradient(
+  /* background: radial-gradient(
     circle,
     rgba(27, 36, 83, 1) 0%,
-    rgba(26, 10, 40, 0.907533960849965) 100%
-  );
-  height: calc(100vh);
+    rgba(26, 10, 40, 0.1) 100%
+  );*/
+  height: 100%;
 }
-
 
 .padding-default {
   padding: 11px;
@@ -106,8 +103,6 @@ button {
   border-radius: 10px;
 }
 
-
-
 @media only screen and (min-width: 600px) {
   body {
     width: 100%;
@@ -115,9 +110,10 @@ button {
   }
   #app {
     max-width: calc(100vw);
-
     width: 600px;
     margin: auto;
+    margin-top: 10px;
+    border-radius: 10px;
   }
   .raven-rebels-multi-wallet__asset-image img {
     max-height: 300;
@@ -127,9 +123,11 @@ button {
   .padding-default {
     padding: 22px;
   }
-  #app{
-    border-radius: 10px;
-  }
 }
 
-
+@media only screen and (min-width: 1024px) {
+  #app {
+    max-width: calc(100vw);
+    width: 710px;
+  }
+}

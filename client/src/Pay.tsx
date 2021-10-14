@@ -151,7 +151,7 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
             style={{ marginBottom: "22px" }}
           >
             <h1>Receive address</h1>
-            <div style={{ wordWrap: "break-word" }}>{receiveAddress}</div>
+            <div style={{fontSize: "90%", wordWrap: "break-word" }}>{receiveAddress}</div>
             <img
               style={{
                 background: "white",
