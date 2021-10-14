@@ -3,7 +3,8 @@ import React from "react";
 export function Pay({ user, database, assets, receiveAddress, okCallback }) {
   const [to, setTo] = React.useState("");
   const [amount, setAmount] = React.useState("");
-  const [asset, setAsset] = React.useState(assets && assets[0].name);
+  const defaultAsset = assets && assets.length > 0 && assets[0].name;
+  const [asset, setAsset] = React.useState(defaultAsset);
 
   const submit = async (_) => {
     if (isNaN(parseFloat(amount)) === true) {
@@ -143,14 +144,13 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
   return (
     <div className="raven-rebels-multi-wallet__pay padding-default">
       <div className="padding-default glass">
-        <h1>Pay / Transfer</h1>
-        {PAY}
+
         <div style={{ marginTop: "22px" }}>
           <div
             className="padding-default glass"
             style={{ marginBottom: "22px" }}
           >
-            <h3>Receive address</h3>
+            <h1>Receive address</h1>
             <div style={{ wordWrap: "break-word" }}>{receiveAddress}</div>
             <img
               style={{
@@ -163,6 +163,9 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
             />
           </div>
         </div>
+        <div className="glass padding-default">
+          <h1>Pay / Transfer</h1>
+          {PAY}</div>
       </div>
     </div>
   );

@@ -30,7 +30,7 @@ function Cosmos() {
         // setUser(authResult.user);
         return true;
       },*/
-      uiShown: function () {},
+      uiShown: function () { },
     },
     signInOptions: [
       // List of OAuth providers supported.
@@ -83,28 +83,31 @@ function App({ user, logOut }) {
 
     ref.on("value", (snapshot) => {
       const userObj = snapshot.val();
- 
+
       //Set requests
-      console.log("Requests", Object.values(userObj.requests));
-      setRequests(Object.values(userObj.requests));
+      if (userObj.request) {
+
+        console.log("Requests", Object.values(userObj.requests));
+        setRequests(Object.values(userObj.requests));
+      }
 
       //Set set receive address
-      if(userObj.ravencoinAddresses){
+      if (userObj.ravencoinAddresses) {
         setReceiveAddress(Object.values(userObj.ravencoinAddresses)[0]["address"]);
       }
 
       //Set transactions
       setTransactions(userObj.transactions);
-      
+
     });
-   
+
     const unregisterEventListener = function () {
       ref.off("value");
     };
     return unregisterEventListener;
   }, []);
-  
- 
+
+
 
   React.useEffect(() => {
     //Listen to balance
@@ -115,6 +118,9 @@ function App({ user, logOut }) {
         //One user might have multiple addresses
         //Sum the balance of all addresses by asset
         const assetBalancesRaw = snapshot.val();
+        if(!assetBalancesRaw){
+          return null;
+        }
         const assetBalances = {};
         const assetsIPFS = {};
         assetBalancesRaw.map(function (assetBalanceItem) {

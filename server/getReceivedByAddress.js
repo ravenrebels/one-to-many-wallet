@@ -11,7 +11,9 @@ async function getReceivedByAddress(address, includeAllTransactions) {
   const thisAddress = values.filter(
     (addressObject) => addressObject.address === address
   );
-  console.log(thisAddress);
+  if(thisAddress.length === 0){
+    return {};
+  }
   const transactionsList = thisAddress[0].txids;
   const transactions = {};
   for (const id of transactionsList) {

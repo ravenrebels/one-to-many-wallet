@@ -1,21 +1,20 @@
 html,
 body {
+
   margin: 0;
   padding: 0;
   height: auto;
 }
-body {
-  position: relative;
-}
+ 
 a {
   color: white;
 }
 body {
-  background: black;
+ 
   color: white;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 50%;
+  position: relative;
+  background-image: url("https://cdn.pixabay.com/photo/2020/08/23/11/58/restaurant-5510672_1280.jpg");
+   
   background-size: cover;
   /* background-image: linear-gradient(147deg, #957dad, #000 74%); */
   font-family: "Quicksand", sans-serif;
@@ -36,6 +35,7 @@ button {
 #app {
   width: 100%;
   margin: auto;
+  margin-top: 0;
 }
 
 #app {
@@ -45,6 +45,7 @@ button {
     rgba(27, 36, 83, 1) 0%,
     rgba(26, 10, 40, 0.907533960849965) 100%
   );
+  height: calc(100vh);
 }
 
 
@@ -58,6 +59,7 @@ button {
   list-style: none;
   margin-bottom: 0;
   padding-top: 22px;
+  margin-top: 0;
 }
 .raven-rebels-multi-wallet__nav-item {
   display: inline-block;
@@ -113,7 +115,8 @@ button {
   }
   #app {
     max-width: calc(100vw);
-    width: 900px;
+
+    width: 600px;
     margin: auto;
   }
   .raven-rebels-multi-wallet__asset-image img {
@@ -123,6 +126,9 @@ button {
   }
   .padding-default {
     padding: 22px;
+  }
+  #app{
+    border-radius: 10px;
   }
 }
 
