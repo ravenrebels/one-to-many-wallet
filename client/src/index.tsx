@@ -221,6 +221,7 @@ function App({ user, logOut }) {
           user={user}
         />
       )}
+      <div style={{"clear": "both"}}></div>
     </div>
   );
 }

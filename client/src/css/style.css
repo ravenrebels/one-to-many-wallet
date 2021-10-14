@@ -9,15 +9,13 @@ a {
   color: white;
 }
 body {
-  background: rgb(168,179,238);
-  background: radial-gradient(circle, rgba(168,179,238,1) 1%, rgba(132,15,235,0.907533960849965) 100%);
+  background: white;
   color: white;
-  position: relative;
-  display: flex;
-  justify-content: center;
 
   font-family: "Quicksand", sans-serif;
   font-size: 16px;
+  justify-content: center;
+  position: relative;
 }
 button {
   font-size: 20px;
@@ -28,13 +26,13 @@ button {
   -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  border: 1px solid rgba(0, 0, 0, 0.18);
 }
 /* mobile first */
 #app {
   width: 100%;
   margin: auto;
   margin-top: 0;
+  background-image: url("../img/d_glass-morphism_card_1080p_4x.webp");
 }
 
 #app {
@@ -43,7 +41,7 @@ button {
     rgba(27, 36, 83, 1) 0%,
     rgba(26, 10, 40, 0.1) 100%
   );*/
-  height: 100%;
+ 
 }
 
 .padding-default {
