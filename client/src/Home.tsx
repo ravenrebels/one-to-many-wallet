@@ -6,6 +6,31 @@ export function Home({ user, assets }) {
     { text: "Balance", align: "right", value: "balance" },
   ];
 
+  React.useEffect(() => {
+    //Check if images has loaded
+
+    assets.map(function (a) {
+      if (a.processed) {
+        return;
+      }
+      if (!a.imageRef) {
+        return null;
+      }
+      a.processed = true;
+
+      console.log("Did not return");
+      const target = a.imageRef.current;
+      target.addEventListener("error", function () {
+        const iframe = document.createElement("iframe");
+        iframe.style.width="100%"; 
+        iframe.style.height="250px";
+        iframe.setAttribute("frameborder", "0");
+        // iframe.style.width = "100%";
+        iframe.src = a.ipfsURL;
+        target.parentNode.replaceChild(iframe, target);
+      });
+    });
+  }, [assets]);
   assets =
     assets &&
     assets.map(function (asset) {
@@ -16,14 +41,19 @@ export function Home({ user, assets }) {
         asset.ipfs_hash &&
         "https://cloudflare-ipfs.com/ipfs/" + asset.ipfs_hash;
 
-      asset.image = asset.ipfsURL && (
-        <div className="raven-rebels-multi-wallet__asset-image">
-          <img
-            onClick={() => window.open(asset.ipfsURL, "ipfs")}
-            src={asset.ipfsURL}
-          />
-        </div>
-      );
+      asset.image = null;
+      if (asset.ipfsURL) {
+        asset.imageRef = React.createRef();
+        asset.image = (
+          <div className="raven-rebels-multi-wallet__asset-image">
+            <img
+              ref={asset.imageRef}
+              onClick={() => window.open(asset.ipfsURL, "ipfs")}
+              src={asset.ipfsURL}
+            />
+          </div>
+        );
+      }
 
       if (asset.ipfsURL) {
         asset.link = (
