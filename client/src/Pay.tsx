@@ -143,29 +143,28 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
 
   return (
     <div className="raven-rebels-multi-wallet__pay padding-default">
-      <div className="padding-default glass">
-
-        <div style={{ marginTop: "22px" }}>
-          <div
-            className="padding-default glass"
-            style={{ marginBottom: "22px" }}
-          >
-            <h1>Receive address</h1>
-            <div style={{fontSize: "90%", wordWrap: "break-word" }}>{receiveAddress}</div>
-            <img
-              style={{
-                background: "white",
-                borderRadius: "10px",
-                marginTop: "10px",
-              }}
-              className="padding-modest"
-              src={`http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=raven:${receiveAddress}&qzone=1&margin=0&size=150x150&ecc=L`}
-            />
-          </div>
+      <div
+        class="glass padding-default"
+        style={{ fontSize: "1.5rem", marginBottom: "44px" }}
+      >
+        <h2> Receive address</h2>{" "}
+        <div style={{ fontSize: "60%", wordWrap: "break-word" }}>
+          {receiveAddress}
         </div>
-        <div className="glass padding-default">
-          <h1>Pay / Transfer</h1>
-          {PAY}</div>
+        <img
+          style={{
+            background: "white",
+            borderRadius: "10px",
+            marginTop: "10px",
+          }}
+          className="padding-modest"
+          src={`http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=raven:${receiveAddress}&qzone=1&margin=0&size=150x150&ecc=L`}
+        />
+      </div>
+
+      <div className="glass padding-default">
+        <h1>Pay / Transfer</h1>
+        {PAY}
       </div>
     </div>
   );

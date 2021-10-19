@@ -44,8 +44,13 @@ export function Home({ user, assets }) {
       </div>
       {items.map(function (i) {
         return (
-          <div className="padding-default glass raven-rebels-multi-wallet__home-asset" key={i.name}>
-            <h3>{i.link}: {i.balance}</h3> 
+          <div
+            className="padding-default glass raven-rebels-multi-wallet__home-asset"
+            key={i.name}
+          >
+            <h3>
+              {i.link}: {i.balance}
+            </h3>
             {i.image}
           </div>
         );

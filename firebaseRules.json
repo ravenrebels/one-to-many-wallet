@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": true,
+        "$whatever": {
+          ".write": "$uid === auth.uid",
+          ".read": "$uid === auth.uid"
+        },
+        "ravencoinAddresses": {
+          ".read": true,
+          ".write": false
+        }
+      }
+    },
+    "transactions": {
+      ".read": true
+    },
+    "assets": {
+      ".read": true
+    }
+  }
+}

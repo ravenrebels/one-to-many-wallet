@@ -30,7 +30,7 @@ function Cosmos() {
         // setUser(authResult.user);
         return true;
       },*/
-      uiShown: function () { },
+      uiShown: function () {},
     },
     signInOptions: [
       // List of OAuth providers supported.
@@ -86,19 +86,19 @@ function App({ user, logOut }) {
 
       //Set requests
       if (userObj.requests) {
-
         console.log("Requests", Object.values(userObj.requests));
         setRequests(Object.values(userObj.requests));
       }
 
       //Set set receive address
       if (userObj.ravencoinAddresses) {
-        setReceiveAddress(Object.values(userObj.ravencoinAddresses)[0]["address"]);
+        setReceiveAddress(
+          Object.values(userObj.ravencoinAddresses)[0]["address"]
+        );
       }
 
       //Set transactions
       setTransactions(userObj.transactions);
-
     });
 
     const unregisterEventListener = function () {
@@ -106,8 +106,6 @@ function App({ user, logOut }) {
     };
     return unregisterEventListener;
   }, []);
-
-
 
   React.useEffect(() => {
     //Listen to balance
@@ -118,7 +116,7 @@ function App({ user, logOut }) {
         //One user might have multiple addresses
         //Sum the balance of all addresses by asset
         const assetBalancesRaw = snapshot.val();
-        if(!assetBalancesRaw){
+        if (!assetBalancesRaw) {
           return null;
         }
         const assetBalances = {};
@@ -221,7 +219,7 @@ function App({ user, logOut }) {
           user={user}
         />
       )}
-      <div style={{"clear": "both"}}></div>
+      <div style={{ clear: "both" }}></div>
     </div>
   );
 }

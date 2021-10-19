@@ -33,6 +33,7 @@ button {
   margin: auto;
   margin-top: 0;
   background-image: url("../img/d_glass-morphism_card_1080p_4x.webp");
+  border-radius: 0;
 }
 
 #app {
