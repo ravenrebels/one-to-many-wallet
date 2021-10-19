@@ -85,7 +85,7 @@ function App({ user, logOut }) {
       const userObj = snapshot.val();
 
       //Set requests
-      if (userObj.request) {
+      if (userObj.requests) {
 
         console.log("Requests", Object.values(userObj.requests));
         setRequests(Object.values(userObj.requests));
