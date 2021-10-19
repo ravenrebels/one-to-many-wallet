@@ -9,28 +9,26 @@ export function Home({ user, assets }) {
   React.useEffect(() => {
     //Check if images has loaded
 
-    assets.map(function (a) {
-      if (a.processed) {
-        return;
-      }
-      if (!a.imageRef) {
-        return null;
-      }
-      a.processed = true;
+    assets.map(
+      function (a) {
+        if (!a.imageRef) {
+          return null;
+        }
 
-      console.log("Did not return");
-      const target = a.imageRef.current;
-      target.addEventListener("error", function () {
-        const iframe = document.createElement("iframe");
-        iframe.style.width="100%"; 
-        iframe.style.height="250px";
-        iframe.setAttribute("frameborder", "0");
-        // iframe.style.width = "100%";
-        iframe.src = a.ipfsURL;
-        target.parentNode.replaceChild(iframe, target);
-      });
-    });
-  }, [assets]);
+        const target = a.imageRef.current; 
+        target.addEventListener("error", function () {
+          const iframe = document.createElement("iframe");
+          iframe.style.width = "100%";
+          iframe.style.height = "250px";
+          iframe.setAttribute("frameborder", "0");
+          // iframe.style.width = "100%";
+          iframe.src = a.ipfsURL;
+          target.parentNode.replaceChild(iframe, target);
+        });
+      },
+      [assets]
+    );
+  });
   assets =
     assets &&
     assets.map(function (asset) {
