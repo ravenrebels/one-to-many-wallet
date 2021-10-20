@@ -5,7 +5,10 @@ import { Home } from "./Home";
 import { Pay } from "./Pay";
 
 import { hasPendingTransactions, Transactions } from "./Transactions";
-import firebase from "firebase";
+import firebase from "firebase/app";
+import "firebase/database";
+import "firebase/auth";
+
 import firebaseConfig from "../../firebaseConfig.json";
 import settings from "../../settings.json";
 
