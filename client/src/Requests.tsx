@@ -13,7 +13,6 @@ interface IProps {
 }
 export default function Requests(props: IProps) {
   const requests = JSON.parse(JSON.stringify(props.requests));
-  console.log("Requests", requests);
   if (!requests) {
     return (
       <h1 className="glass padding-default">
@@ -40,7 +39,6 @@ export default function Requests(props: IProps) {
       </div>
       <div>
         {requests.map(function (request, index) {
-          console.log("index", index);
           return (
             <div
               key={index}

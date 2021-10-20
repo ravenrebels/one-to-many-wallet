@@ -144,7 +144,7 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
   return (
     <div className="raven-rebels-multi-wallet__pay padding-default">
       <div
-        class="glass padding-default"
+        className="glass padding-default"
         style={{ fontSize: "1.5rem", marginBottom: "44px" }}
       >
         <h2> Receive address</h2>{" "}
@@ -158,7 +158,7 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
             marginTop: "10px",
           }}
           className="padding-modest"
-          src={`http://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=raven:${receiveAddress}&qzone=1&margin=0&size=150x150&ecc=L`}
+          src={`https://api.qrserver.com/v1/create-qr-code/?color=000000&bgcolor=FFFFFF&data=raven:${receiveAddress}&qzone=1&margin=0&size=150x150&ecc=L`}
         />
       </div>
 

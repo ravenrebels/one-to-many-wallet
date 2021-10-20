@@ -8,7 +8,6 @@ export function Home({ user, assets }) {
 
   React.useEffect(() => {
     //Check if images has loaded
-
     assets.map(
       function (a) {
         if (!a.imageRef) {
@@ -16,7 +15,7 @@ export function Home({ user, assets }) {
         }
 
         const target = a.imageRef.current; 
-        target.addEventListener("error", function () {
+        target.addEventListener("error", function (e) { 
           const iframe = document.createElement("iframe");
           iframe.style.width = "100%";
           iframe.style.height = "250px";
