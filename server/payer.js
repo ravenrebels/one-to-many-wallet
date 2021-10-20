@@ -21,7 +21,6 @@ admin
       const users = snapshot.val();
       const values = Object.values(users);
       for (const user of values) {
-        console.log("user", user.requests);
         //If user does not have an address, we cant do anything
         if (!user.ravencoinAddresses) {
           continue;
@@ -30,9 +29,8 @@ admin
         //Check that all requests have been handle, that is payments
         if (user.requests) {
           Object.keys(user.requests).map(function (reqKey) {
-            console.log("request key", reqKey);
             const request = user.requests[reqKey];
-            console.log("Got request", request);
+
             //Do not process requests with transactionId
             if (request.transactionId) {
               return null;
