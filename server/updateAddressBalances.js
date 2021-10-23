@@ -1,9 +1,3 @@
-const admin = require("firebase-admin");
-const getRPC = require("./getRPC");
-const rvnConfig = require("./rvnConfig.json");
-const serviceAccount = require("./serviceAccount.json");
-const getReceivedByAddress = require("./getReceivedByAddress");
-const firebaseConfig = require("../firebaseConfig.json");
 const fs = require("fs");
 const lockFileName = "./update.lock";
 //Check if lock file exists
@@ -17,27 +11,20 @@ try {
 } catch (e) {
   console.error(e);
 }
+
+const admin = require("firebase-admin");
+const getRPC = require("./getRPC");
+const rvnConfig = require("./rvnConfig.json");
+const serviceAccount = require("./serviceAccount.json");
+const getReceivedByAddress = require("./getReceivedByAddress");
+const firebaseConfig = require("../firebaseConfig.json");
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: firebaseConfig.databaseURL,
 });
 
 const rpc = getRPC(rvnConfig);
-
-//Read all users
-//Check that each user has an array of Ravencoin addresses
-
-async function assignRavencoinAddresses(userUID) {
-  const newAddress = await rpc("getnewaddress", []);
-  const ravencoinAddresses = await admin
-    .database()
-    .ref("users/" + userUID + "/ravencoinAddresses");
-  const newPostRef = ravencoinAddresses.push();
-  await newPostRef.set({
-    address: newAddress,
-  });
-  console.log("ADDRESS", newAddress, "assigned to", userUID);
-}
 
 async function processAddressesByUser(user) {
   if (user.ravencoinAddresses) {
@@ -87,6 +74,5 @@ async function work() {
     process.exit(1);
   };
   setTimeout(func, timeToLive);
-}
-
+} 
 work();
