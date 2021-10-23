@@ -46,7 +46,7 @@ async function processAddressesByUser(user) {
           assetBalances.push(obj);
         }
         const transactions = await getReceivedByAddress(address);
-        console.log("TRANS", transactions);
+
         await admin
           .database()
           .ref("users/" + user.uid + "/transactions")
@@ -62,11 +62,14 @@ async function processAddressesByUser(user) {
   console.log(user.displayName, user.uid, user.ravencoinAddresses);
 }
 async function work() {
-  function verifyUser(snapshot) {
+  async function verifyUser(snapshot) {
     if (snapshot.exists() === true) {
       const users = snapshot.val();
       const values = Object.values(users);
-      values.map(processAddressesByUser);
+
+      for (const u of values) { 
+        await processAddressesByUser(u);
+      }
     }
   }
 
