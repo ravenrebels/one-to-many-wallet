@@ -33,23 +33,27 @@ async function processAddressesByUser(user) {
     for (const addressKey of Object.keys(user.ravencoinAddresses)) {
       const addressObject = user.ravencoinAddresses[addressKey];
       const address = addressObject.address;
-      const balance = await rpc("listassetbalancesbyaddress", [address]);
-      for (const assetName of Object.keys(balance)) {
-        const data = await rpc("getassetdata", [assetName]);
-        const num = balance[assetName];
-        const obj = {
-          name: assetName,
-          balance: num,
-          ipfs_hash: data.ipfs_hash || null,
-        };
-        assetBalances.push(obj);
+      try {
+        const balance = await rpc("listassetbalancesbyaddress", [address]);
+        for (const assetName of Object.keys(balance)) {
+          const data = await rpc("getassetdata", [assetName]);
+          const num = balance[assetName];
+          const obj = {
+            name: assetName,
+            balance: num,
+            ipfs_hash: data.ipfs_hash || null,
+          };
+          assetBalances.push(obj);
+        }
+        const transactions = await getReceivedByAddress(address);
+        console.log("TRANS", transactions);
+        await admin
+          .database()
+          .ref("users/" + user.uid + "/transactions")
+          .update(transactions);
+      } catch (e) {
+        console.log("Error processing user/addresses", user.email, e);
       }
-      const transactions = await getReceivedByAddress(address);
-      console.log("TRANS", transactions);
-      await admin
-        .database()
-        .ref("users/" + user.uid + "/transactions")
-        .update(transactions);
     }
 
     const ref = admin.database().ref("users/" + user.uid + "/assetbalances");
@@ -74,5 +78,5 @@ async function work() {
     process.exit(1);
   };
   setTimeout(func, timeToLive);
-} 
+}
 work();
