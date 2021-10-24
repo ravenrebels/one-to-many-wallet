@@ -1,11 +1,42 @@
 import React from "react";
 
+//@ts-ignore
+var Html5QrcodeScanner = window.Html5QrcodeScanner;
+
 export function Pay({ user, database, assets, receiveAddress, okCallback }) {
   const [to, setTo] = React.useState("");
   const [amount, setAmount] = React.useState("");
   const defaultAsset = assets && assets.length > 0 && assets[0].name;
   const [asset, setAsset] = React.useState(defaultAsset);
 
+  const startVideoButtonRef = React.createRef();
+  React.useEffect(() => {
+    const scanQR = () => {
+      let html5QrcodeScanner = new Html5QrcodeScanner(
+        "reader",
+        { fps: 2, qrbox: { width: 250, height: 250 } },
+        /* verbose= */ false
+      );
+      function onScanSuccess(decodedText, decodedResult) {
+        // handle the scanned code as you like, for example:
+        if (decodedText.startsWith("raven:") === true) {
+          decodedText = decodedText.replace("raven:", "");
+        }
+        setTo(decodedText);
+        html5QrcodeScanner.clear();
+      }
+
+      function onScanFailure(error) {
+        // handle scan failure, usually better to ignore and keep scanning.
+        // for example:
+        // console.warn(`Code scan error = ${error}`);
+      }
+
+      html5QrcodeScanner.render(onScanSuccess, onScanFailure);
+    };
+
+    startVideoButtonRef.current.addEventListener("click", scanQR);
+  }, []);
   const submit = async (_) => {
     if (isNaN(parseFloat(amount)) === true) {
       alert("Amount is not valid");
@@ -56,6 +87,10 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
   };
   const PAY = (
     <div>
+      <div className="glass padding-default">
+        <div id="reader" width="600px"></div>
+        <button ref={startVideoButtonRef}>Scan QR code</button>
+      </div>
       <div style={{ overflow: "hidden" }}>
         <div style={{ marginBottom: "22px" }}>
           <label>
