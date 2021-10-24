@@ -22,8 +22,8 @@ button {
 }
 .glass {
   background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(8px);
+
   border-radius: 10px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
@@ -33,16 +33,8 @@ button {
   margin: auto;
   margin-top: 0;
   background-image: url("../img/d_glass-morphism_card_1080p_4x.webp");
-  border-radius: 0;
-}
 
-#app {
-  /* background: radial-gradient(
-    circle,
-    rgba(27, 36, 83, 1) 0%,
-    rgba(26, 10, 40, 0.1) 100%
-  );*/
- 
+  border-radius: 0;
 }
 
 .padding-default {
@@ -129,4 +121,22 @@ button {
     max-width: calc(100vw);
     width: 710px;
   }
+}
+
+/*
+
+#reader__dashboard
+is the QR Code reader toolbar
+*/
+#reader__dashboard {
+  font-size: 22px;
+}
+#reader__camera_selection {
+  font-size: 22px;
+}
+#reader__dashboard_section_fsr {
+  font-size: 22px;
+}
+#reader__dashboard_section_fsr input {
+  font-size: 22px;
 }

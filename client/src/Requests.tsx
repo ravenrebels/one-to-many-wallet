@@ -45,6 +45,9 @@ export default function Requests(props: IProps) {
               className="glass padding-default"
               style={{ marginBottom: "10px" }}
             >
+              {request.error && request.error.message && (
+                <h3>Error: {request.error.message}</h3>
+              )}
               <div>
                 {request.amount} {request.asset}
                 <br />

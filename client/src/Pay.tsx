@@ -1,42 +1,14 @@
 import React from "react";
-
-//@ts-ignore
-var Html5QrcodeScanner = window.Html5QrcodeScanner;
+import QRReader from "./QRReader";
 
 export function Pay({ user, database, assets, receiveAddress, okCallback }) {
   const [to, setTo] = React.useState("");
   const [amount, setAmount] = React.useState("");
   const defaultAsset = assets && assets.length > 0 && assets[0].name;
   const [asset, setAsset] = React.useState(defaultAsset);
+  const [showQR, setShowQR] = React.useState(false);
+  const startQRReader = React.createRef();
 
-  const startVideoButtonRef = React.createRef();
-  React.useEffect(() => {
-    const scanQR = () => {
-      let html5QrcodeScanner = new Html5QrcodeScanner(
-        "reader",
-        { fps: 2, qrbox: { width: 250, height: 250 } },
-        /* verbose= */ false
-      );
-      function onScanSuccess(decodedText, decodedResult) {
-        // handle the scanned code as you like, for example:
-        if (decodedText.startsWith("raven:") === true) {
-          decodedText = decodedText.replace("raven:", "");
-        }
-        setTo(decodedText);
-        html5QrcodeScanner.clear();
-      }
-
-      function onScanFailure(error) {
-        // handle scan failure, usually better to ignore and keep scanning.
-        // for example:
-        // console.warn(`Code scan error = ${error}`);
-      }
-
-      html5QrcodeScanner.render(onScanSuccess, onScanFailure);
-    };
-
-    startVideoButtonRef.current.addEventListener("click", scanQR);
-  }, []);
   const submit = async (_) => {
     if (isNaN(parseFloat(amount)) === true) {
       alert("Amount is not valid");
@@ -68,7 +40,7 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
 
         if (data.error) {
           const text = `
-          ${data.error}. 
+          ${data.error.message}. 
           Could not send ${data.amount} 
           of ${data.asset} 
           to ${data.to}`;
@@ -87,10 +59,14 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
   };
   const PAY = (
     <div>
-      <div className="glass padding-default">
-        <div id="reader" width="600px"></div>
-        <button ref={startVideoButtonRef}>Scan QR code</button>
-      </div>
+      <button
+        className="unstyled-button glass"
+        style={{ padding: "10px", margin: "10px", marginBottom: "20px" }}
+        onClick={() => setShowQR(true)}
+      >
+        Scan QR code
+      </button>
+
       <div style={{ overflow: "hidden" }}>
         <div style={{ marginBottom: "22px" }}>
           <label>
@@ -176,6 +152,15 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
     </div>
   );
 
+  if (showQR == true) {
+    const onClose = () => {
+      setShowQR(false);
+    };
+    const onChange = (value: string) => {
+      setTo(value);
+    };
+    return <QRReader onClose={onClose} onChange={onChange} />;
+  }
   return (
     <div className="raven-rebels-multi-wallet__pay padding-default">
       <div
