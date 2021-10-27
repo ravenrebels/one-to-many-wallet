@@ -40,13 +40,17 @@ function getRPC(config) {
             resolutionFunc(result);
           })
           .catch((e) => {
-            console.log("FUCK UP catch", e);
+            if (e.response) {
+              //We were able to connect to the wallet but something was wrong with our request
+            } else if (e.request) {
+              //Could NOT connect to wallet
+            }
+
             const { response } = e;
             const { request, ...errorObject } = response;
             rejectionFunc(errorObject);
           });
       } catch (e) {
-        console.log("Less fuck up catch", e);
         rejectionFunc(e.response);
       }
     });

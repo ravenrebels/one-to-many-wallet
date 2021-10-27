@@ -74,6 +74,7 @@ admin
                 .update(obj);
             });
             promise.catch(function (e) {
+           
               const obj = {
                 date: new Date(),
                 error: e.data.error,
@@ -99,11 +100,7 @@ admin
                 8. "asset_change_address"     (string, optional, default = "") the transaction Asset change will be sent to this address
               */
           });
-        }
-        //Check balance of address
-        //listassetbalancesbyaddress "myaddress"
+        } 
       }
     }
-  });
-
-//Set balance on all addresses
+  }); 
