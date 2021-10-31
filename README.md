@@ -75,3 +75,30 @@ The server part is the code that will be running on the same machine as your Rav
 Change directoty to ./server
 Run command 
 
+
+## Configuration
+### firebaseConfig.json
+In the root directory, create a file called ```./firebaseConfig.json```,  see file ```./firebaseConfigExample.json``` for example data.
+
+### settings.json
+assetNames is optional, if not empty array, only these assets will be visible in the wallet
+```
+{
+    "heading": "Rebellious Restaurant",
+    "assetNames":[ ] 
+}
+```
+
+### ./server/serviceAccount.json
+This is your service account json file you export from the firebase console of your project.
+
+To generate a private key file for your service account:
+
+* In the Firebase console, open Settings > Service Accounts.
+* Click Generate New Private Key, then confirm by clicking Generate Key.
+* Securely store the JSON file containing the key.
+
+
+
+
+
