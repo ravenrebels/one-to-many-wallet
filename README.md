@@ -60,5 +60,14 @@ You secure your project by applying rules
   }
 }
 ```
+## Build client
+Change directory to ./client
+Run command ```npm install``` to install dependencies
+Run command ```npm start``` to start development server locally on https://localhost:1234
+Run command ```npm run build``` to build web client for production, the files are "outputted" to ./dist
 
+## Setup "server" part
+The server part is the code that will be running on the same machine as your Ravencoin wallet.
+Change directoty to ./server
+Run command 
 
