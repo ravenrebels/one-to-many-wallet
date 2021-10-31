@@ -14,8 +14,8 @@ export function Home({ user, assets }) {
           return null;
         }
 
-        const target = a.imageRef.current; 
-        target.addEventListener("error", function (e) { 
+        const target = a.imageRef.current;
+        target.addEventListener("error", function (e) {
           const iframe = document.createElement("iframe");
           iframe.style.width = "100%";
           iframe.style.height = "250px";
@@ -62,12 +62,12 @@ export function Home({ user, assets }) {
       return asset;
     });
 
-  const items = assets || [];
+  const items = assets || []; 
   return (
     <div className="padding-default">
       <div className="glass raven-rebels-multi-wallet__home-heading padding-default">
         <h2>{settings.heading}</h2>
-        <h5>{user.displayName}</h5>
+        <h5>{user.displayName || user.phoneNumber}</h5>
       </div>
       {items.map(function (i) {
         return (

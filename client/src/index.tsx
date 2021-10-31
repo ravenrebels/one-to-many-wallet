@@ -32,6 +32,7 @@ function Cosmos() {
     signInOptions: [
       // List of OAuth providers supported.
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.PhoneAuthProvider.PROVIDER_ID
     ],
   };
   if (user) {
