@@ -8,7 +8,7 @@ The user/customer can transfer tokens FROM this project TO their own Ravencoin w
 
 # DO NOT USE THIS CODE, NOT YET
 
-#Setup Ravencoin wallet
+# Setup Ravencoin wallet
 
 Go to https://ravencoin.org/wallet/ and download Ravencoin desktop wallet for your OS.
 Configure you wallet to index assets and stuff
@@ -28,3 +28,37 @@ rpcuser=SET_A_VERY_SECRET_USER_NAME
 rpcpassword=SET_A_VERY_SECRET_PASSWORD
 ```
 Notes: it can take a day or two to download and index the blockchain
+
+# Google Firebase (middleware)
++ Create a project at Google Firebase
++ Realtime Database (create it)
+
+## Configure Realtime database rules
+You secure your project by applying rules
+```
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": true,
+        "$whatever": {
+          ".write": "$uid === auth.uid",
+          ".read": "$uid === auth.uid"
+        },
+        "ravencoinAddresses": {
+          ".read": true,
+          ".write": false
+        }
+      }
+    },
+    "transactions": {
+      ".read": true
+    },
+    "assets": {
+      ".read": true
+    }
+  }
+}
+```
+
+
