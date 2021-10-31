@@ -21,12 +21,6 @@ button {
   font-size: 20px;
 }
 .glass {
-  /*
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-
-  border-radius: 10px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);*/
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -39,9 +33,16 @@ button {
   width: 100%;
   margin: auto;
   margin-top: 0;
+  /* Example local image file */
   background-image: url("../img/d_glass-morphism_card_1080p_4x.webp");
-  background-image: url("https://cdn.pixabay.com/photo/2017/10/15/22/35/v-for-vendetta-2855606_960_720.jpg");
   background-image: url("../img/v-for-vendetta-2855606_1920.jpg");
+
+  /* Example external image */
+  background-image: url("https://cdn.pixabay.com/photo/2017/10/15/22/35/v-for-vendetta-2855606_960_720.jpg");
+
+  /* Use color gradient instead of background image */
+  background: rgb(131, 58, 180);
+  background-image: linear-gradient(147deg, #923cb5, #000 74%);
 
   background-size: cover;
   border-radius: 0;

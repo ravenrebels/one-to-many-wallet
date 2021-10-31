@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebaseConfig from "../../firebaseConfig.json";
 import App from "./App";
+import settings from "../../settings.json";
 
 export type User = firebase.User;
 const app = firebase.initializeApp(firebaseConfig);
@@ -38,7 +39,9 @@ function Cosmos() {
   } else {
     return (
       <div style={{ marginTop: "50px", padding: "44px" }}>
-        <h1>Wallet</h1>
+        <h2 style={{ marginTop: "50px", padding: "44px" }}>
+          {settings.heading}
+        </h2>
 
         <StyledFirebaseAuth
           uiConfig={uiConfig}
