@@ -55,7 +55,15 @@ export default function Requests(props: IProps) {
               </div>
               <div>{request.to}</div>
               <div style={{ overflow: "hidden", textOverflow: "ellipsis" }}>
-                {request.transactionId}
+                <a
+                  target="_blockexplorer"
+                  href={
+                    "https://rvn.cryptoscope.io/tx/?txid=" +
+                    request.transactionId
+                  }
+                >
+                  {request.transactionId}
+                </a>
               </div>
               <div>{request.error && request.error.message}</div>
             </div>

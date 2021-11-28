@@ -78,7 +78,7 @@ export function Transactions({ requests, transactions }) {
 
           const send = details.category === "send";
           const amount = details.amount;
-          const href = "https://explorer.ravenland.org/tx/" + key;
+          const href = "https://rvn.cryptoscope.io/tx/?txid=" + key;
           const text =
             (send === true ? "Sent" : "Received") +
             ` ${amount} ${details.assetName}`;
