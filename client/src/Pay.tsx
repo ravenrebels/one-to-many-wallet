@@ -167,6 +167,7 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
         className="glass padding-default"
         style={{ fontSize: "1.5rem", marginBottom: "44px" }}
       >
+        This wallet is ASSET ONLY, do not send RVN to this wallet.
         <h2> Receive address</h2>{" "}
         <div style={{ fontSize: "60%", wordWrap: "break-word" }}>
           {receiveAddress}
