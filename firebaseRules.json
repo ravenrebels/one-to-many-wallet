@@ -1,14 +1,20 @@
 {
   "rules": {
+    "ravencoinAddresses": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": false
+      }
+    },
     "users": {
       "$uid": {
-        ".read": true,
+        ".read": "$uid === auth.uid",
         "$whatever": {
-          ".write": "$uid === auth.uid",
-          ".read": "$uid === auth.uid"
+          ".read": "$uid === auth.uid",
+          ".write": "$uid === auth.uid"
         },
         "ravencoinAddresses": {
-          ".read": true,
+          ".read": "$uid === auth.uid",
           ".write": false
         }
       }
