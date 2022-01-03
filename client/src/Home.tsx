@@ -36,7 +36,7 @@ export function Home({ user, assets }) {
       asset.link = asset.name;
       asset.ipfsURL =
         asset.ipfs_hash &&
-        "https://ravencoinipfs-gateway.com/ipfs/" + asset.ipfs_hash;
+        "https://ipfs.infura.io/ipfs/" + asset.ipfs_hash;
 
       asset.image = null;
       if (asset.ipfsURL) {
