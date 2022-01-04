@@ -1,29 +1,32 @@
 {
   "rules": {
-    "ravencoinAddresses": {
+    "assetBalances": {
       "$uid": {
-        ".read": "$uid === auth.uid",
-        ".write": false
-      }
+        ".read": "$uid === auth.uid",  
+      	".write":"$uid === auth.uid"  
+      }      
     },
-    "users": {
+    "requests": {
       "$uid": {
-        ".read": "$uid === auth.uid",
+        ".read": "$uid === auth.uid",  
+      	".write":"$uid === auth.uid"  
+      }      
+    },
+    "users": { 
+      "$uid": {
+       ".read": "$uid === auth.uid",
         "$whatever": {
-          ".read": "$uid === auth.uid",
-          ".write": "$uid === auth.uid"
+         	 	".write": "$uid === auth.uid",
+        		".read": "$uid === auth.uid" 
         },
         "ravencoinAddresses": {
-          ".read": "$uid === auth.uid",
-          ".write": false
-        }
+        				".read": "$uid === auth.uid",
+        				".write": false
+        }       
       }
-    },
+   },
     "transactions": {
-      "$uid": {
-        ".read": "$uid === auth.uid",
-        ".write": false
-      }
+       ".read": true
     },
     "assets": {
       ".read": true

@@ -38,10 +38,16 @@ You secure your project by applying rules
 ```
 {
   "rules": {
-    "ravencoinAddresses": {
+    "assetBalances": {
       "$uid": {
-      		".write": false,
-      		".read": "$uid === auth.uid"   
+        ".read": "$uid === auth.uid",  
+      	".write":"$uid === auth.uid"  
+      }      
+    },
+    "requests": {
+      "$uid": {
+        ".read": "$uid === auth.uid",  
+      	".write":"$uid === auth.uid"  
       }      
     },
     "users": { 
