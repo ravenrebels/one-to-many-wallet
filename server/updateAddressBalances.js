@@ -56,7 +56,7 @@ async function processAddressesByUser(user) {
       }
     }
 
-    const ref = admin.database().ref("assetbalances/" + user.uid);
+    const ref = admin.database().ref("assetBalances/" + user.uid);
     await ref.set(assetBalances);
   }
   console.log(user.displayName, user.uid, user.ravencoinAddresses);

@@ -41,8 +41,7 @@ export default function App({ firebase, user, logOut }) {
     const ref = firebase.database().ref("transactions/" + user.uid);
 
     ref.on("value", (snapshot) => {
-      const data = snapshot.val();
-      console.log("Want to set transactions", data);
+      const data = snapshot.val(); 
       setTransactions(data);
     });
   }, []);
