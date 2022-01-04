@@ -49,14 +49,14 @@ async function processAddressesByUser(user) {
 
         await admin
           .database()
-          .ref("users/" + user.uid + "/transactions")
+          .ref("transactions/" + user.uid)
           .update(transactions);
       } catch (e) {
-        console.log("Error processing user/addresses", user.email, e);
+        console.log("Error processing user/addresses", user.uid, e);
       }
     }
 
-    const ref = admin.database().ref("users/" + user.uid + "/assetbalances");
+    const ref = admin.database().ref("assetbalances/" + user.uid);
     await ref.set(assetBalances);
   }
   console.log(user.displayName, user.uid, user.ravencoinAddresses);
@@ -67,7 +67,7 @@ async function work() {
       const users = snapshot.val();
       const values = Object.values(users);
 
-      for (const u of values) { 
+      for (const u of values) {
         await processAddressesByUser(u);
       }
     }

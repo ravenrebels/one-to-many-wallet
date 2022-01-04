@@ -20,7 +20,10 @@
       }
     },
     "transactions": {
-      ".read": true
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": false
+      }
     },
     "assets": {
       ".read": true

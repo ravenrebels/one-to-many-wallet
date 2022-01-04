@@ -24,6 +24,7 @@ export default function App({ firebase, user, logOut }) {
 
   //One time, update user profile
   React.useEffect(() => {
+    console.info("User id", user.uid);
     //Make sure we get a clean copy of the user object
     //that we can modifiy before saving to firebase
     const obj = JSON.parse(JSON.stringify(user.toJSON()));
@@ -35,40 +36,42 @@ export default function App({ firebase, user, logOut }) {
       .update(obj);
   }, []);
 
-  //Listen to user
+  //Listen to transactions
   React.useEffect(() => {
-    const refString = "users/" + user.uid;
-    const ref = firebase.database().ref(refString);
+    const ref = firebase.database().ref("transactions/" + user.uid);
 
     ref.on("value", (snapshot) => {
-      const userObj = snapshot.val();
+      const data = snapshot.val();
+      console.log("Want to set transactions", data);
+      setTransactions(data);
+    });
+  }, []);
+  //Listen to requests
+  React.useEffect(() => {
+    const ref = firebase.database().ref("requests/" + user.uid);
 
-      //Set requests
-      if (userObj.requests) {
-        setRequests(Object.values(userObj.requests));
-      }
+    ref.on("value", (snapshot) => {
+      const data = snapshot.val();
+      setRequests(Object.values(data));
+    });
+  }, []);
 
-      //Set set receive address
-      if (userObj.ravencoinAddresses) {
-        setReceiveAddress(
-          Object.values(userObj.ravencoinAddresses)[0]["address"]
-        );
-      }
-
-      //Set transactions
-      setTransactions(userObj.transactions);
-
-      //Set Asset Balances
-      //One user might have multiple addresses
-      //Sum the balance of all addresses by asset
-
-      const assetBalancesRaw = userObj.assetbalances;
+  React.useEffect(() => {
+    //Set Asset Balances
+    //One user might have multiple addresses
+    //Sum the balance of all addresses by asset
+    const ref = firebase.database().ref("assetBalances/" + user.uid);
+    ref.on("value", (snapshot) => {
+      const assetBalancesRaw = snapshot.val();
       if (!assetBalancesRaw) {
         return null;
       }
       const assetBalances = {};
       const assetsIPFS = {};
-      assetBalancesRaw.map(function (assetBalanceItem) {
+      const arr = Object.values(assetBalancesRaw);
+
+      arr.map(function (assetBalanceItem: any) {
+        console.log(assetBalanceItem);
         assetsIPFS[assetBalanceItem.name] = assetBalanceItem.ipfs_hash;
         if (!assets[assetBalanceItem.name]) {
           assetBalances[assetBalanceItem.name] = 0;
@@ -101,6 +104,19 @@ export default function App({ firebase, user, logOut }) {
         });
       }
       setAssets(assetsArray);
+    });
+  }, []);
+  React.useEffect(() => {
+    const ref = firebase.database().ref("users/" + user.uid);
+    ref.on("value", (snapshot) => {
+      const userObj = snapshot.val();
+
+      //Set receive address
+      if (userObj.ravencoinAddresses) {
+        setReceiveAddress(
+          Object.values(userObj.ravencoinAddresses)[0]["address"]
+        );
+      }
     });
 
     const unregisterEventListener = function () {

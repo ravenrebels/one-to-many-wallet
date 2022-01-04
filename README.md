@@ -38,21 +38,27 @@ You secure your project by applying rules
 ```
 {
   "rules": {
-    "users": {
+    "ravencoinAddresses": {
       "$uid": {
-        ".read": true,
+      		".write": false,
+      		".read": "$uid === auth.uid"   
+      }      
+    },
+    "users": { 
+      "$uid": {
+       ".read": "$uid === auth.uid",
         "$whatever": {
-          ".write": "$uid === auth.uid",
-          ".read": "$uid === auth.uid"
+         	 	".write": "$uid === auth.uid",
+        		".read": "$uid === auth.uid" 
         },
         "ravencoinAddresses": {
-          ".read": true,
-          ".write": false
-        }
+        				".read": "$uid === auth.uid",
+        				".write": false
+        }       
       }
-    },
+   },
     "transactions": {
-      ".read": true
+       ".read": true
     },
     "assets": {
       ".read": true

@@ -25,7 +25,7 @@ export function Pay({ user, database, assets, receiveAddress, okCallback }) {
     }
     const str = `Are you sure you want to send\n${amount} ${asset} \nto\n ${to}?`;
     if (confirm(str)) {
-      const requests = database.ref("/users/" + user.uid + "/requests");
+      const requests = database.ref("/requests/" + user.uid);
       const newReq = requests.push();
 
       newReq.set({
