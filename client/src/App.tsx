@@ -9,18 +9,20 @@ import firebase from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
 
-import settings from "../../settings.json";
+import useAssets from "./useAssets";
 
 export type User = firebase.User;
 
 export default function App({ firebase, user, logOut }) {
   const [route, setRoute] = React.useState(Routes.OVERVIEW);
-  const [assets, setAssets] = React.useState([]);
+
   const [receiveAddress, setReceiveAddress] = React.useState("");
   const [transactions, setTransactions] = React.useState(null);
   const [requests, setRequests] = React.useState([]);
 
   const database = firebase.database();
+
+  const assets = useAssets(firebase, user);
 
   //One time, update user profile
   React.useEffect(() => {
@@ -39,11 +41,14 @@ export default function App({ firebase, user, logOut }) {
   //Listen to transactions
   React.useEffect(() => {
     const ref = firebase.database().ref("transactions/" + user.uid);
-
-    ref.on("value", (snapshot) => {
-      const data = snapshot.val(); 
+    const listener = ref.on("value", (snapshot) => {
+      const data = snapshot.val();
       setTransactions(data);
     });
+    //Return a clean up function
+    return () => {
+      ref.off("value", listener);
+    };
   }, []);
   //Listen to requests
   React.useEffect(() => {
@@ -55,56 +60,6 @@ export default function App({ firebase, user, logOut }) {
     });
   }, []);
 
-  React.useEffect(() => {
-    //Set Asset Balances
-    //One user might have multiple addresses
-    //Sum the balance of all addresses by asset
-    const ref = firebase.database().ref("assetBalances/" + user.uid);
-    ref.on("value", (snapshot) => {
-      const assetBalancesRaw = snapshot.val();
-      if (!assetBalancesRaw) {
-        return null;
-      }
-      const assetBalances = {};
-      const assetsIPFS = {};
-      const arr = Object.values(assetBalancesRaw);
-
-      arr.map(function (assetBalanceItem: any) {
-        console.log(assetBalanceItem);
-        assetsIPFS[assetBalanceItem.name] = assetBalanceItem.ipfs_hash;
-        if (!assets[assetBalanceItem.name]) {
-          assetBalances[assetBalanceItem.name] = 0;
-        }
-        assetBalances[assetBalanceItem.name] += assetBalanceItem.balance;
-      });
-
-      let assetsArray = Object.keys(assetBalances).map((name) => {
-        return {
-          name,
-          balance: assetBalances[name],
-          ipfs_hash: assetsIPFS[name],
-        };
-      });
-
-      //Sort assets alphabetically
-      assetsArray = assetsArray.sort(function (a, b) {
-        if (a.name > b.name) {
-          return 1;
-        }
-        if (a.name === b.name) {
-          return 0;
-        }
-        return -1;
-      });
-      //Filter assets, if specified in settings.json
-      if (settings.assetNames && settings.assetNames.length > 0) {
-        assetsArray = assetsArray.filter(function (asset) {
-          return settings.assetNames.includes(asset.name);
-        });
-      }
-      setAssets(assetsArray);
-    });
-  }, []);
   React.useEffect(() => {
     const ref = firebase.database().ref("users/" + user.uid);
     ref.on("value", (snapshot) => {
